@@ -1,0 +1,22 @@
+{
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "baseUrl": "https://www.saucedemo.com/",
+    "title": "Swag Labs",
+    "productName": "Sauce Labs Bike Light",
+    "checkoutInfoTitle": "Checkout: Your Information",
+    "firstname": "Mousum",
+    "lastname": "Das",
+    "zipcode": "734001",
+    "checkoutOverviewTitle": "Checkout: Overview",
+    "checkoutCompleteTitle": "Checkout: Complete!",
+    "thankYouMessage": "Thank You",
+    "orderMessage": "order has been dispatched",
+    "productTitle": "Products",
+    "defaultSorting": "Price (low to high)",
+    "productName1": "Sauce Labs Onesie",
+    "productName2": "Sauce Labs Fleece Jacket",
+    "hoverOnDeveloper": "developers",
+    "seleniumUrl": "https://docs.saucelabs.com/web-apps/automated-testing/selenium/quickstart/",
+    "parentUrl": "https://saucelabs.com/"
+}
