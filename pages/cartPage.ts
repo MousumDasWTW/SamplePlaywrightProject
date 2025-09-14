@@ -27,15 +27,16 @@ export class cartPage extends basePage {
         expect(title).toBe(checkoutTitle);
     }
 
-    async fetchPrices(prodName: string): Promise<void> {
+    async verifyFetchPrices(prodName: string): Promise<void> {
         let price = '//div[text()="' + prodName + '"]//parent::a//following-sibling::div//div';
 
         let itemPriceCart = await this.page.locator(price).textContent();
         console.log('The price for item ' + prodName + ' in cart page is : ' + itemPriceCart);
 
         const fetchPricesProduct = util.getData();
-        console.log(`Logged in as: ${fetchPricesProduct}`);
-        console.log('The fetched price for product ' + prodName + ' from product page is :' + fetchPricesProduct);
+        console.log('The fetched price for product ' + prodName + ' from product page is : ' + fetchPricesProduct);
+
+        expect(itemPriceCart).toBe(fetchPricesProduct);
     }
 
     async clickRemoveBtn(prodName: string) {
@@ -71,7 +72,12 @@ export class cartPage extends basePage {
         console.log('The total item in cart is :' + cartItemCount);
 
         expect(sum.toLocaleString()).toBe(cartItemCount);
-        const getData = util.getData();
-        console.log('This is the get data :' + getData);
+        // const getData = util.getData();
+        // console.log('This is the get data :' + getData);
+    }
+
+    async navigateBack()
+    {
+        await util.navigateBackToPreviousPage(this.page);
     }
 }

@@ -53,7 +53,9 @@ export class checkoutOverviewPage extends basePage {
         console.log('The amount is :' + amount);
 
         const amountProductPage = util.getData();
-        console.log('Thhe get method amt is :' + amountProductPage);
+        console.log('The get method amt is : ' + amountProductPage);
+
+        expect('$'+amount).toBe(amountProductPage);
     }
 
     async clickFinishBtn() {

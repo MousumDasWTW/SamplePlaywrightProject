@@ -43,4 +43,16 @@ export class util {
       console.error(`Failed to check visibility of element: ${text}`, error);
     }
   }
+
+  static async navigateBackToPreviousPage(page: Page)
+  {
+    const currentUrl = page.url();
+    console.log('The current url is : '+currentUrl);
+    await page.goBack();
+
+    const previousUrl = page.url();
+    console.log('The previous url is : '+previousUrl);
+
+    expect(currentUrl).not.toBe(previousUrl);
+  }
 }

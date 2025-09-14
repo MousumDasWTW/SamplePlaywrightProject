@@ -13,6 +13,7 @@ test("User should successfully be able to click add to cart", {tag: ['@regressio
     await productStep.clearCookies();
     await productStep.navigateToUrl(testdata.baseUrl);
     await productStep.waitForPageLoad();
+    
     await loginStep.loginSauceDemo(testdata.username, testdata.password);
 
     await productStep.clickAddToCartBtn(testdata.productName);

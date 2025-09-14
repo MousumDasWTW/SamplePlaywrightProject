@@ -41,14 +41,18 @@ test("User should successfully be able to fetch price", {tag: ['@e2e', '@regress
     await loginStep.loginSauceDemo(testdata.username, testdata.password);
 
     await productStep.fetchPrices(testdata.productName1);
-    await productStep.fetchPrices(testdata.productName2);
     await productStep.clickAddToCartBtn(testdata.productName1);
-    await productStep.clickAddToCartBtn(testdata.productName2);
     await productStep.clickCartIcon();
+    await cartStep.verifyFetchPrices(testdata.productName1);
 
-    await cartStep.fetchPrices(testdata.productName1);
-    await cartStep.fetchPrices(testdata.productName2);
-
+    await cartStep.navigateBack();
+    
+    await productStep.fetchPrices(testdata.productName2);
+    await productStep.clickAddToCartBtn(testdata.productName2);
+    await productStep.verifyCartIcon();
+    await productStep.clickCartIcon();
+    await cartStep.verifyFetchPrices(testdata.productName2);
+    
     await cartStep.clickRemoveBtn(testdata.productName1);
 
     await homeStep.verifyAndClickBurgerIcon();
