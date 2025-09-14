@@ -19,10 +19,9 @@ export class cartPage extends basePage {
     }
 
     async verifyAndClickCheckout(checkoutTitle: string) {
-        const checkoutBtnVisibility = this.page.locator(this.checkoutBtn);
-        await expect(checkoutBtnVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.checkoutBtn);
 
-        await this.page.locator(this.checkoutBtn).click();
+        await util.clickElement(this.page, this.checkoutBtn);
 
         let title = await this.page.locator(this.checkoutInfo).textContent();
         expect(title).toBe(checkoutTitle);
@@ -34,7 +33,7 @@ export class cartPage extends basePage {
         let itemPriceCart = await this.page.locator(price).textContent();
         console.log('The price for item ' + prodName + ' in cart page is : ' + itemPriceCart);
 
-        const fetchPricesProduct = await this.getSharedData('itemPriceProduct');
+        const fetchPricesProduct = util.getData();
         console.log(`Logged in as: ${fetchPricesProduct}`);
         console.log('The fetched price for product ' + prodName + ' from product page is :' + fetchPricesProduct);
     }

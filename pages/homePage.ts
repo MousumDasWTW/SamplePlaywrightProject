@@ -1,5 +1,6 @@
 import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "../pages/basePage";
+import { util } from "../Utils/util";
 
 export class homePage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -7,35 +8,28 @@ export class homePage extends basePage {
     }
 
     private burgerIcon = '#react-burger-menu-btn';
-    private logoutLink = '#logout_sidebar_link'
-    private inventoryLink = '#inventory_sidebar_link'
-    private aboutLink = '#about_sidebar_link'
-    private resetLink = '#reset_sidebar_link'
+    // private logoutLink = '#logout_sidebar_link'
+    // private inventoryLink = '#inventory_sidebar_link'
+    // private aboutLink = '#about_sidebar_link'
+    // private resetLink = '#reset_sidebar_link'
 
     async verifyAndClickBurgerIcon() {
-        const hanburgerIconVisibility = this.page.locator(this.burgerIcon);
-        await expect(hanburgerIconVisibility).toBeVisible();
-
-        await this.page.locator(this.burgerIcon).click();
+        await util.elementToBeVisible(this.page, this.burgerIcon);
+        await util.clickElement(this.page, this.burgerIcon);
     }
 
     async verifyLinks() {
-        let linkLogout = await this.page.locator("text=Logout");
-        await expect(linkLogout).toBeVisible();
+        await util.elementToBeVisible(this.page, "text=Logout");
 
-        let linkResetApp = await this.page.locator("text=Reset App State");
-        await expect(linkResetApp).toBeVisible();
+        await util.elementToBeVisible(this.page, "text=Reset App State");
 
-        let linkAllItems = await this.page.locator("text=All Items");
-        await expect(linkAllItems).toBeVisible();
+        await util.elementToBeVisible(this.page, "text=All Items");
 
-        let linkAbout = await this.page.locator("text=About");
-        await expect(linkAbout).toBeVisible();
+        await util.elementToBeVisible(this.page, "text=About");
     }
 
     async clickLogout() {
-        let linkLogout = this.page.locator("text=Logout");
-        await linkLogout.click();
+        await util.clickElement(this.page, "text=Logout");
     }
 
     async verifyLoginPageUrl(url: string) {

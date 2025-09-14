@@ -1,5 +1,6 @@
 import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "../pages/basePage";
+import { util } from "../Utils/util";
 
 export class checkoutInfoPage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -9,20 +10,17 @@ export class checkoutInfoPage extends basePage {
     private checkoutOverview = 'span.title';
 
     async verifyCheckoutInfomation() {
-        const firstnameTxtboxBtnVisibility = this.page.getByPlaceholder('First Name');
-        await expect(firstnameTxtboxBtnVisibility).toBeVisible();
+        await util.elementToBeVisiblePlaceholder(this.page, 'First Name');
 
-        const lastnameTxtboxVisibility = this.page.getByPlaceholder('Last Name');
-        await expect(lastnameTxtboxVisibility).toBeVisible();
+        await util.elementToBeVisiblePlaceholder(this.page, 'Last Name');
 
-        const zipTxtboxVisibility = this.page.getByPlaceholder('Zip/Postal Code');
-        await expect(zipTxtboxVisibility).toBeVisible();
+        await util.elementToBeVisiblePlaceholder(this.page, 'Zip/Postal Code');
 
-        const cancelBtnVisibility = this.page.getByRole('button', { name: /cancel/i });
-        await expect(cancelBtnVisibility).toBeVisible();
+        const cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
+        await expect(cancelBtn).toBeVisible();
 
-        const continueBtnVisibility = this.page.getByRole('button', { name: /continue/i });
-        await expect(continueBtnVisibility).toBeVisible();
+        const continueBtn = this.page.getByRole('button', { name: 'Continue' });
+        await expect(continueBtn).toBeVisible();
     }
 
     async fillDesiredInformation(firstname: string, lastname: string, zipcode: string) {

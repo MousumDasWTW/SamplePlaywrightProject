@@ -1,5 +1,6 @@
 import { expect, Page, Browser, BrowserContext } from "@playwright/test";
 import { basePage } from "./basePage";
+import { util } from "../Utils/util";
 
 export class aboutPage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -23,37 +24,30 @@ export class aboutPage extends basePage {
 
     async clickAboutLink() {
         let linkAbout = await this.page.locator("text=About")
-
         await linkAbout.click();
+
         await this.page.waitForLoadState('load');
     }
 
     async verifyAboutHeaders() {
-        const productVisibility = this.page.locator(this.product);
-        await expect(productVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.product);
 
-        const solutionsVisibility = this.page.locator(this.solutions);
-        await expect(solutionsVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.solutions);
 
-        const pricingVisibility = this.page.locator(this.pricing);
-        await expect(pricingVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.pricing);
 
-        const developersVisibility = this.page.locator(this.developers);
-        await expect(developersVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.developers);
 
-        const resourcesVisibility = this.page.locator(this.resources);
-        await expect(resourcesVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.resources);
     }
 
     async performHover(headerName: string) {
         if (headerName === 'developers') {
             await this.page.hover(this.developers);
 
-            const devAndTestResource = this.page.locator(this.devAndTesterResource);
-            await expect(devAndTestResource).toBeVisible();
+            await util.elementToBeVisible(this.page, this.devAndTesterResource);
 
-            const integration = this.page.locator(this.integration);
-            await expect(integration).toBeVisible();
+            await util.elementToBeVisible(this.page, this.integration);
         }
         else if (headerName === 'product') {
             await this.page.hover(this.product);
@@ -67,20 +61,15 @@ export class aboutPage extends basePage {
     }
 
     async verifyQuickstartGuides() {
-        const quickGuides = this.page.locator(this.quickstartGuides);
-        expect(quickGuides).toBeVisible();
+        await util.elementToBeVisible(this.page, this.quickstartGuides);
 
-        const seleniumGuide = this.page.locator(this.selenium);
-        expect(seleniumGuide).toBeVisible();
+        await util.elementToBeVisible(this.page, this.selenium);
 
-        const appiumGuide = this.page.locator(this.appium);
-        expect(appiumGuide).toBeVisible();
+        await util.elementToBeVisible(this.page, this.appium);
 
-        const playwrightGuide = this.page.locator(this.playwright);
-        expect(playwrightGuide).toBeVisible();
+        await util.elementToBeVisible(this.page, this.playwright);
 
-        const cypressGuide = this.page.locator(this.cypress);
-        expect(cypressGuide).toBeVisible();
+        await util.elementToBeVisible(this.page, this.cypress);
     }
 
     async clickSelenium(seleniumUrl: string) {

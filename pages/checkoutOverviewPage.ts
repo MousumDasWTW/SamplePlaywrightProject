@@ -1,5 +1,6 @@
 import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "../pages/basePage";
+import { util } from "../Utils/util";
 
 export class checkoutOverviewPage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -23,35 +24,26 @@ export class checkoutOverviewPage extends basePage {
     }
 
     async verifyProductInfo() {
-        const paymentInfoLabelVisibility = this.page.locator(this.paymentInfoLabel);
-        await expect(paymentInfoLabelVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.paymentInfoLabel);
 
-        const paymentInfoValueVisibility = this.page.locator(this.paymentInfoValue);
-        await expect(paymentInfoValueVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.paymentInfoValue);
 
-        const shippingInfoLabelVisibility = this.page.locator(this.shippingInfoLabel);
-        await expect(shippingInfoLabelVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.shippingInfoLabel);
 
-        const shippingInfoValueVisibility = this.page.locator(this.shippingInfoValue);
-        await expect(shippingInfoValueVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.shippingInfoValue);
 
-        const totalInfoLabelVisibility = this.page.locator(this.totalInfoLabel);
-        await expect(totalInfoLabelVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.totalInfoLabel);
 
-        const itemTotalInfoValueVisibility = this.page.locator(this.itemTotalInfoValue);
-        await expect(itemTotalInfoValueVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.itemTotalInfoValue);
 
-        const taxLabelVisibility = this.page.locator(this.taxLabel);
-        await expect(taxLabelVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.taxLabel);
 
-        const totalLabelVisibility = this.page.locator(this.totalLabel);
-        await expect(totalLabelVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.totalLabel);
 
         const finishBtnVisibility = this.page.getByRole('button', { name: /Finish/i });
         await expect(finishBtnVisibility).toBeVisible();
 
-        const cancelBtnVisibility = this.page.locator(this.cancelBtn);
-        await expect(cancelBtnVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.cancelBtn);
     }
 
     async fetchItemTotal(): Promise<void> {
@@ -60,7 +52,7 @@ export class checkoutOverviewPage extends basePage {
         let amount = totalAmount?.split(':')[1].split('$')[1];
         console.log('The amount is :' + amount);
 
-        const amountProductPage = await this.getSharedData('itemPriceProduct');
+        const amountProductPage = util.getData();
         console.log('Thhe get method amt is :' + amountProductPage);
     }
 

@@ -1,5 +1,6 @@
 import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "../pages/basePage";
+import { util } from "../Utils/util";
 
 export class checkoutCompletePage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -13,19 +14,16 @@ export class checkoutCompletePage extends basePage {
     private prodTitle = 'span.title'
 
     async verifyCheckoutCompleteMsg(completeMsg: string) {
-        const completeTitleVisibility = this.page.locator(this.checkoutComplete);
-        await expect(completeTitleVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.checkoutComplete);
 
         let title = await this.page.locator(this.checkoutComplete).textContent();
         expect(title).toBe(completeMsg);
     }
 
     async verifyMsg(thanksMsg: string, orderMsg: string) {
-        const successMsgVisibility = this.page.locator(this.successMsg);
-        await expect(successMsgVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.successMsg);
 
-        const thankYouMsgVisibility = this.page.locator(this.thankYouMsg);
-        await expect(thankYouMsgVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.thankYouMsg);
 
         let thankYouMsg = await this.page.locator(this.thankYouMsg).textContent();
         expect(thankYouMsg?.includes(thanksMsg));
@@ -35,12 +33,11 @@ export class checkoutCompletePage extends basePage {
     }
 
     async verifyBackBtn() {
-        const backToHomeVisibility = this.page.locator(this.backToHome);
-        await expect(backToHomeVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.backToHome);
     }
 
     async clickBackBtn(prodTitle: string) {
-        await this.page.locator(this.backToHome).click();
+        await util.clickElement(this.page, this.backToHome);
 
         let title = await this.page.locator(this.prodTitle).textContent();
         expect(title).toBe(prodTitle);

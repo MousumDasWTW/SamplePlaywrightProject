@@ -21,14 +21,13 @@ export class productPage extends basePage {
 
     async clickAddToCartBtn(prodName: string) {
         let addToCartBtn = '//div[text()="' + prodName + '"]//ancestor::div[@class="inventory_item_label"]//following-sibling::div//button[contains(text(),"Add")]';
-        await this.page.locator(addToCartBtn).click();
+        await util.clickElement(this.page, addToCartBtn);
         countForAddedProd++;
         console.log('The count is :' + countForAddedProd);
     }
 
     async verifyCartIcon() {
-        const cartIconVisibility = this.page.locator(this.cartIcon);
-        await expect(cartIconVisibility).toBeVisible();
+        await util.elementToBeVisible(this.page, this.cartIcon);
     }
 
     async verifyProductCountInCartLogo() {
@@ -92,7 +91,6 @@ export class productPage extends basePage {
         let itemPriceProduct = await this.page.locator(price).textContent();
         console.log('The price for item ' + prodName + ' is : ' + itemPriceProduct);
 
-        //this.setSharedData('itemPriceProduct', itemPriceProduct);
-        util.setData('itemPriceProduct');
+        util.setData(itemPriceProduct);
     }
 }

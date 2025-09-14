@@ -1,5 +1,6 @@
 import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "../pages/basePage";
+import { util } from "../Utils/util";
 
 export class loginPage extends basePage {
     constructor(page: Page, context: BrowserContext) {
@@ -13,19 +14,16 @@ export class loginPage extends basePage {
     private errorMsg = '//h3[@data-test="error"]';
 
     async loginSauceDemo(username: string, password: string) {
-        const usernameFieldVisibility = this.page.locator(this.userNameField);
-        await expect(usernameFieldVisibility).toBeVisible();
-        await this.page.locator(this.userNameField).click();
+        await util.elementToBeVisible(this.page, this.userNameField);
+        await util.clickElement(this.page, this.userNameField);
         await this.page.locator(this.userNameField).fill(username);
 
-        const passwordFieldVisibility = this.page.locator(this.passwordField);
-        await expect(passwordFieldVisibility).toBeVisible();
-        await this.page.locator(this.passwordField).click();
+        await util.elementToBeVisible(this.page, this.passwordField);
+        await util.clickElement(this.page, this.passwordField);
         await this.page.locator(this.passwordField).fill(password);
 
-        const loginBtnVisibility = this.page.locator(this.loginBtn);
-        await expect(loginBtnVisibility).toBeVisible();
-        await this.page.locator(this.loginBtn).click();
+        await util.elementToBeVisible(this.page, this.loginBtn);
+        await util.clickElement(this.page, this.loginBtn);
 
         await this.page.waitForTimeout(800);
     }
