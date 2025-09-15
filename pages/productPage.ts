@@ -2,7 +2,6 @@ import { expect, Page, BrowserContext } from "@playwright/test";
 import { basePage } from "./basePage";
 import { util } from "../Utils/util";
 
-let countForAddedProd = 0;
 let pricesListString: string[] = [];
 
 export class productPage extends basePage {
@@ -22,8 +21,11 @@ export class productPage extends basePage {
     async clickAddToCartBtn(prodName: string) {
         let addToCartBtn = '//div[text()="' + prodName + '"]//ancestor::div[@class="inventory_item_label"]//following-sibling::div//button[contains(text(),"Add")]';
         await util.clickElement(this.page, addToCartBtn);
-        countForAddedProd++;
-        console.log('The count is :' + countForAddedProd);
+
+        let removeBtn = await this.page.getByRole('button', { name: 'Remove' }).count();
+        console.log('The count of remove button is : ' + removeBtn);
+
+        util.setData('removeBtn', removeBtn);
     }
 
     async verifyCartIcon() {
@@ -33,12 +35,14 @@ export class productPage extends basePage {
     async verifyProductCountInCartLogo() {
         let selectedProduct = await this.page.locator(this.addedProduct).textContent();
         console.log(selectedProduct);
-        expect(selectedProduct).toBe(countForAddedProd.toString());
+        let removeBtnCount = util.getData('removeBtn');
+        console.log('The remove button are : ' + removeBtnCount)
+        expect(selectedProduct).toBe(removeBtnCount.toString());
     }
 
     async clickCartIcon() {
         await this.page.locator(this.cartIcon).click();
-        await this.page.waitForSelector(this.cartTitle, { state: 'visible', timeout: 5000 });
+        await this.page.waitForSelector(this.cartTitle, { state: 'visible', timeout: util.timeout });
     }
 
     async selectPricesLowToHigh(defaultSorting: string) {
@@ -91,6 +95,6 @@ export class productPage extends basePage {
         let itemPriceProduct = await this.page.locator(price).textContent();
         console.log('The price for item ' + prodName + ' is : ' + itemPriceProduct);
 
-        util.setData(itemPriceProduct);
+        util.setData('itemPriceProduct', itemPriceProduct);
     }
 }

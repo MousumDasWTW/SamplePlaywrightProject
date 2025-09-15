@@ -33,7 +33,7 @@ export class cartPage extends basePage {
         let itemPriceCart = await this.page.locator(price).textContent();
         console.log('The price for item ' + prodName + ' in cart page is : ' + itemPriceCart);
 
-        const fetchPricesProduct = util.getData();
+        const fetchPricesProduct = util.getData('itemPriceProduct');
         console.log('The fetched price for product ' + prodName + ' from product page is : ' + fetchPricesProduct);
 
         expect(itemPriceCart).toBe(fetchPricesProduct);
@@ -72,12 +72,9 @@ export class cartPage extends basePage {
         console.log('The total item in cart is :' + cartItemCount);
 
         expect(sum.toLocaleString()).toBe(cartItemCount);
-        // const getData = util.getData();
-        // console.log('This is the get data :' + getData);
     }
 
-    async navigateBack()
-    {
+    async navigateBack() {
         await util.navigateBackToPreviousPage(this.page);
     }
 }

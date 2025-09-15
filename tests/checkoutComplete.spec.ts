@@ -56,7 +56,7 @@ test("User should successfully be able to verify success message and go back to 
     await checkoutCompleteStep.navigateToUrl(testdata.baseUrl);
     await checkoutCompleteStep.waitForPageLoad();
 
-    await loginStep.loginSauceDemo(testdata.username, testdata.password);
+    await loginStep.loginSauceDemo(testdata.username, testdata.password);   
 
     await productStep.clickAddToCartBtn(testdata.productName1);
     await productStep.clickAddToCartBtn(testdata.productName2);

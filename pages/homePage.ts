@@ -8,10 +8,6 @@ export class homePage extends basePage {
     }
 
     private burgerIcon = '#react-burger-menu-btn';
-    // private logoutLink = '#logout_sidebar_link'
-    // private inventoryLink = '#inventory_sidebar_link'
-    // private aboutLink = '#about_sidebar_link'
-    // private resetLink = '#reset_sidebar_link'
 
     async verifyAndClickBurgerIcon() {
         await util.elementToBeVisible(this.page, this.burgerIcon);
@@ -35,5 +31,16 @@ export class homePage extends basePage {
     async verifyLoginPageUrl(url: string) {
         const currentUrl = this.page.url();
         expect(currentUrl).toBe(url);
+    }
+
+    async resetAppItems()
+    {
+        const resetApp = this.page.getByText('Reset App State');
+        await resetApp.click();
+
+        await this.page.reload({timeout: util.dynamicTimeout});
+
+        const removeBtn = this.page.getByText('Remove');
+        await expect(removeBtn).not.toBeVisible();
     }
 }

@@ -1,16 +1,19 @@
 import { Page, expect } from "@playwright/test";
 
 export class util {
-  private static data: string = '';
+  static timeout = 5000;
+  private static data: { [key: string]: any } = {};
 
-  static setData(value: any): void {
-    this.data = value;
-    console.log('Data set to :' + this.data);
+  // Static method to set data
+  static setData(key: string, value: any): void {
+    this.data[key] = value;
+    console.log('Data set to: '+this.data[key]);
   }
 
-  static getData(): string {
-    console.log('Data retrieved :' + this.data);
-    return this.data;
+  // Static method to get data
+  static getData(key: string): any {
+    console.log('Data retrieved is: '+this.data[key]);
+    return this.data[key];
   }
 
   static async clickElement(page: Page, selector: string): Promise<void> {

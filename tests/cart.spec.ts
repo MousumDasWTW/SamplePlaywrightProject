@@ -18,6 +18,8 @@ test("User should successfully be able to perform checkout", {tag: ['@smoke', '@
     
     await loginStep.loginSauceDemo(testdata.username, testdata.password);
 
+    
+
     await productStep.clickAddToCartBtn(testdata.productName);
     await productStep.clickCartIcon();
 

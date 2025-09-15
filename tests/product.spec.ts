@@ -16,8 +16,8 @@ test("User should successfully be able to click add to cart", {tag: ['@regressio
     
     await loginStep.loginSauceDemo(testdata.username, testdata.password);
 
-    await productStep.clickAddToCartBtn(testdata.productName);
     await productStep.verifyCartIcon();
+    await productStep.clickAddToCartBtn(testdata.productName);
     await productStep.verifyProductCountInCartLogo();
 
     await homeStep.verifyAndClickBurgerIcon();
@@ -32,6 +32,7 @@ test("User should successfully be able to click cart, add item and chekout", {ta
     await productStep.clearCookies();
     await productStep.navigateToUrl(testdata.baseUrl);
     await productStep.waitForPageLoad();
+
     await loginStep.loginSauceDemo(testdata.username, testdata.password);
 
     await productStep.clickAddToCartBtn(testdata.productName);

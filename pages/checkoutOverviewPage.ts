@@ -52,7 +52,7 @@ export class checkoutOverviewPage extends basePage {
         let amount = totalAmount?.split(':')[1].split('$')[1];
         console.log('The amount is :' + amount);
 
-        const amountProductPage = util.getData();
+        const amountProductPage = util.getData('itemPriceProduct');
         console.log('The get method amt is : ' + amountProductPage);
 
         expect('$'+amount).toBe(amountProductPage);
