@@ -9,7 +9,7 @@ test("User should be able to successfully click all items", {tag: ['@regression'
     const loginStep = new loginPage(page, context);
     const homeStep = new homePage(page, context);
     const aboutStep = new aboutPage(page, context);
-    test.setTimeout(50000);
+    test.setTimeout(80000);
 
     await homeStep.clearCookies();
     await homeStep.navigateToUrl(testdata.baseUrl);

@@ -43,6 +43,8 @@ export class productPage extends basePage {
     async clickCartIcon() {
         await this.page.locator(this.cartIcon).click();
         await this.page.waitForSelector(this.cartTitle, { state: 'visible', timeout: util.timeout });
+        let cartTitle = await this.page.locator(this.cartTitle).textContent();
+        expect(cartTitle).toBe('Your Cart');
     }
 
     async selectPricesLowToHigh(defaultSorting: string) {

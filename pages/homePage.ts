@@ -38,7 +38,7 @@ export class homePage extends basePage {
         const resetApp = this.page.getByText('Reset App State');
         await resetApp.click();
 
-        await this.page.reload({timeout: util.dynamicTimeout});
+        await this.page.reload({timeout: util.timeout});
 
         const removeBtn = this.page.getByText('Remove');
         await expect(removeBtn).not.toBeVisible();
